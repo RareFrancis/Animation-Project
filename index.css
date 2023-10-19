@@ -1,0 +1,787 @@
+@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap');
+
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --primary: #00c2de;
+}
+
+body {
+    background:#000000;
+    font-family: 'Roboto', sans-serif;
+    
+}
+
+/* new cursor creation */
+.png {
+    cursor: url('steering-wheel.png'), auto;
+   
+  }
+
+/* Header */
+header{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 100px;
+    z-index: 1000;
+}
+
+header::after{
+    position: absolute;
+    content: '';
+    top: 50%;
+    transform: translateY(-50%);
+    left: 100px;
+    height: 5px;
+    width: 35%;
+    background: linear-gradient(90deg, var(--primary),transparent);
+}
+.logo{
+    font-size: 30px;
+    color: #ffffff;
+}
+.logo img{
+    max-width: 200px;
+    filter: invert(1);
+}
+
+header .year{
+    font-family: 'Racing Sans One',cursive;
+    font-size: 1em;
+    color: #ffffff;
+    letter-spacing: 1px;
+    font-weight: 800;
+    margin-top: 40px;
+}
+
+header .menu{
+    position: relative;
+    height: 30px;
+    width: 30px;
+    background: url('menu-3-fill.png') no-repeat;
+    background-size: 30px;
+    background-position: center;
+    filter: invert(1);/*flip the color black to white*/
+    cursor: pointer;
+}
+
+header .menu.active{
+    position: relative;
+    height: 35px;
+    width: 35px;
+    background: url('close-line.png') no-repeat;
+    background-size: 30px;
+    background-position: center;
+    filter: invert(1);/*flip the color black to white*/
+    cursor: pointer;
+}
+/* navigation */
+
+.nav{
+    z-index: 200;
+    position: absolute;
+    right: 100px;
+    top: 0;
+    width: 30%;
+    height: 5px;
+    border-bottom: 5px solid;
+    border-color: linear-gradient(/*shades of colors*/
+        90deg,
+        transparent,
+        var(--primary),
+        var(--primary)
+    )a;
+    background: transparent;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    backdrop-filter: blur(20px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 1s;
+    transform-origin: right;
+
+    }
+
+    .nav.active{
+        top: 100px;
+        width: 35%;
+        height: 100px;
+        border-top: 5px solid;
+        border-image: linear-gradient(
+        90deg,
+        transparent,
+        var(--primary),
+        var(--primary)
+    
+        )
+        30;
+
+         border-bottom: none; 
+
+    }
+    .nav li{
+        position:relative;
+        list-style: none;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-100px);
+        transition: .5s;
+    }
+    .nav.active li{
+        transform: translateY(0);
+        visibility: visible;
+        opacity: 1;
+    }
+    .nav li a{
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        text-transform: uppercase;
+        font-weight: 200;
+        letter-spacing: 1px;
+        padding: 8px 20px;
+        transition: .2s;
+        cursor: pointer;
+    }
+
+    .nav li a:hover{
+        box-shadow: inset 0 0 20px rgba(0, 194, 222, 0.5);
+    }
+
+     /* home background animation setup  */
+/* banner style adding */
+.banner{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 0 100px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+    transition: 0.5s;
+    }
+    
+    /* after content adding the banner pseudo element */
+    .banner::after{
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            rgba(0,0,0,0.1),
+            rgba(0,0,0,0.3),
+            rgba(0,0,0,0.6),
+            rgba(0,0,0,0.9)  
+        );
+    }
+    
+     /* before content adding the banner pseudo element */
+    .banner::before{
+        position: absolute;
+        content: '';
+        top: 25%;
+        left:0;
+        width: 5px;
+        height: 40%;
+        background: linear-gradient(var(--primary),var(--primary),transparent);/*same color using multiple time*/
+        z-index: 100;
+    }
+    
+    /* banner background video */
+    .banner.bg-video{
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: '';
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        justify-content: center;
+        align-items: center;
+        padding:0px 20px;
+    }
+    
+    /* banner background video position setup*/
+    .banner .bg-video.active{
+        display: block;
+        margin-top: 10%;
+      
+    }
+    
+    /* Banner content */
+    
+    .banner .content{
+        position: absolute;
+        max-width: 700px;
+        padding-bottom: 200px;
+        z-index: 100;
+    }
+     /* Banner content h1 style adding*/
+     .banner .content h1{
+        font-family:'Racing Sans One',sans-serif ;
+        font-size: 6em;
+        color: #ffffff;
+        font-weight: 500;
+        line-height: .8em;
+        letter-spacing: 5px;
+
+    }
+ /* Banner content style adding*/
+    .banner .content .model{
+        font-size: 3em;
+        text-transform: uppercase;
+        color: var(--primary);
+        display: none;
+    }
+    .banner .content .model.active{
+        display: block;
+    }
+    .banner .content p{
+        color: #ffffff;
+        font-size: 200;
+        letter-spacing: 1px;
+        margin-bottom: 50px;
+    }
+    .banner .content a{
+        position: relative;
+        width: 200px;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 15px 50px;
+        background: transparent;
+        border-bottom: 3px solid;
+        border-image: linear-gradient(
+            90deg,
+            transparent,
+            var(--primary),
+            var(--primary),
+            transparent
+        )
+        a;  /*style add the button*/
+        box-shadow: inset 0 0 10px rgba(0,194,222,.5);
+        backdrop-filter:blur(20px) ;
+        text-transform: uppercase;
+        font-size: 1.2em;
+        font-weight: 300;
+        letter-spacing: 1px;
+        transition: .5s;
+    }
+    /*hover style add the button*/
+    .banner .content a:hover{
+        box-shadow: inset 0 0 50px rgba(0, 194, 222, 0.5);
+    }
+
+
+    /* video mobile responsive @media quaries */
+    @media screen and (max-width: 768px) {
+        .bg-video {
+          /* Adjust the video size and positioning for mobile */
+          width: 100%;
+          height: auto;
+          position: relative;
+        }
+      }
+
+
+
+         /* Book type card animation creation   */
+
+
+/* card image size alignment */
+.ferrari{    
+    width:300px;
+    height:300px;
+    border-radius: 20px;
+}
+
+/* overall card content alignment */
+.container{
+    max-width: 1000px;
+    margin: 100px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/* card styles */
+.card{
+    position: relative;
+    margin: 20px 0;
+    width: 300px;
+    height: 300px;
+    border-radius: 20px;
+    background: white;
+    transform-style: preserve-3d;
+    transform: perspective(2000px);
+    transition: 1s;
+    box-shadow: inset 300px 0 50px rgba(0,0,0,.5);
+
+}
+
+/* hover of the card operation */
+.card:hover{
+    z-index: 1000;
+    transform: perspective(2000px) rotate(-10deg);
+    box-shadow: inset 20px 0 50px rgba(0,0,0,.5);
+}
+
+/* card with inside of the image alignment */
+.card .imgBox{
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    border: 1px solid #000;
+    box-sizing: border-box;
+    transform-origin: left;
+    z-index: 1;
+    transition: 1s;
+}
+
+/* card with inside of the image hover alignment */
+.card:hover .imgBox{
+    transform: rotateY(-135deg);
+
+}
+
+/* card with inside of the image alignment */
+.card .imgBox .img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* inside of the card content alignment */
+.card .details{
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    padding: 20px;
+
+}
+
+
+
+ /* 3d cubic animation creation */
+ .screen{
+   
+    width: 300px;
+    height: 200px;
+    margin-top: 140px;
+    margin-right: 60px;
+    transform-style: preserve-3d;
+    animation: animate 30s linear infinite;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 3d animation rotation  */
+@keyframes animate{
+0%{
+    transform: rotateX(-30deg) rotateY(0deg);
+}
+100%{
+    transform: rotateX(-30deg) rotateY(360deg);
+}
+}
+
+@media (max-width: 768px) {
+    .screen {
+      width: 200px;
+      height: 150px;
+      right: 5%;
+    }
+  
+    /* Adjust the shadow size for smaller screens */
+    .shadow {
+      width: 200px;
+      height: 150px;
+    }
+  }
+
+
+    /* rotate from 0deg to 360deg = one round */
+/*  first two cubic animation videos style */
+.screen div{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+/* cubic animation videos style */
+.screen div span{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: linear-gradient(transparent, var(--primary));
+    transform: rotateY(calc(90deg * var(--i))) translateZ(150px);
+}
+
+/* cubic animation shadow effect */
+.shadow{
+position: absolute;
+content: '';
+top: 0;
+left: 0;
+width: 300px;
+height: 200px;
+background: var(--primary);
+transform: rotateX(-90deg) translateZ(150px);
+filter: blur(20px);
+box-shadow: 0 0 120px rgba(0, 194, 222, 0.2),
+0 0 120px rgba(0, 194, 222, 0.4),
+0 0 120px rgba(0, 194, 222, 0.6),
+0 0 120px rgba(0, 194, 222, 0.8),
+0 0 120px rgba(0, 194, 222, 1),
+}
+
+/* overall cubic animation video style */
+.screen div span video{
+position: absolute;
+bottom: 0;
+height: 75%;
+width: 100%;
+transition: .5s;
+object-fit: cover;
+object-position: center;
+}
+ 
+.trailer{
+display: none;
+}   
+.trailer.active{
+display: block;
+}
+
+
+/* Login form details */
+
+/* section of the login form */
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;
+    width: 100%;
+    height: 100vh;
+    background: url('gif2.gif') no-repeat;
+    background-size: cover;
+    background-position: center;
+    animation: animateBg 5s linear infinite;
+}
+
+@keyframes animateBg { /* Corrected 'keyframe' to 'keyframes' */
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
+
+/*overall login form outline border*/
+.login-box {
+    position: relative;
+    
+    top: 10px;
+    width: 400px;
+    height: 450px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+}
+/* login h1 alignment */
+h2 {
+    font-size: 2em;
+    color: #fff;
+    text-align: center;
+}
+/* login size alignment */
+.input-box {
+    position: relative;
+    width: 310px;
+    margin: 30px 0;
+    border-bottom: 2px solid #fff;
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #fff;
+    pointer-events: none; /* Corrected 'pointer-event' to 'pointer-events' */
+    transition: 0.5s;
+}
+
+/* input box alignment */
+.input-box input:focus~label,
+.input-box input:valid~label {
+    top: -5px;
+}
+
+.input-box input {
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #fff;
+    padding: 0 35px 0 5px;
+}
+
+/* email & password icons */
+.input-box .icon {
+    position: absolute;
+    right: 8px;
+    color: #fff;
+    font-size: 1.2em;
+    line-height: 57px;
+}
+
+.remember-forgot {
+    margin: -15px 0 15px;
+    font-size: 0.9em;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-forgot label input {
+    margin-right: 3px; /* Corrected 'mergin-right' to 'margin-right' */
+}
+
+.remember-forgot a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+/* login button alignment */
+button {
+    width: 100%;
+    height: 40px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #000;
+    font-weight: 500;
+}
+
+/* register-link design */
+.register-link {
+    font-size: 0.9em;
+    color: #fff;
+    text-align: center;
+    margin: 25px 0 10px;
+}
+
+.register-link p a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-link p a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 360px) {
+    .login-box {
+        width: 100%;
+        height: 100vh;
+        border: none;
+        border-radius: 0;
+    }
+}
+
+
+
+
+/* bootom of the car animation  */
+.mclaren-container{
+    margin-top: -120px;
+}
+
+ /* bootom of the car main animation  */
+.mclaren-main{
+    width: 100%;
+    display: flex;
+    
+}
+
+/* bottom animation content alignment */
+.mclaren-content{
+    width:50%;
+    margin-top: 8%;
+    margin-left:5%;
+    color: #fff;
+    overflow: hidden;
+    animation: content 2s ease-in-out;
+}
+
+/* bottom of the content styles like h1 tage*/
+.mclaren-content h1{
+    font-size: 80px;
+    margin-bottom: 1%;
+    letter-spacing: 8px;
+}
+
+/* bottom of the content styles like h3 tage*/
+.mclaren-content h3{
+    font-size: 25px;
+    margin-bottom: 3%;
+    font-family: Verdana,Geneva,Tahoma, sans-serif;
+}
+
+/* bottom of the content color styles */
+span{
+    color:yellow;
+}
+
+/* bottom of the content styles like P tage*/
+.mclaren-content p{
+    font-size:20px;
+    margin-bottom: 3%;
+    font-family: Verdana,Geneva,Tahoma, sans-serif;
+}
+
+
+/* bootom of the animation car size */
+.mclaren-image{
+    width: 50%;
+    margin-top: 8%;
+    z-index: -1;
+}
+
+/* bootom of the animation car working */
+.car{
+    width: 30rem;
+    animation: car 3s ease-in-out ;
+    animation-delay: 1s;
+    animation-name: car; /* Use the @keyframes animation */
+    animation-duration: 2s; /* Duration of the animation */
+    animation-timing-function: ease;
+    animation-iteration-count: infinite; /* Infinite animation repetition */
+    
+}
+
+/* bottom of the animation moving @keyframes */
+
+@keyframes car{
+    0%{
+        transform: translateX(100%);
+    }
+    100%{
+        transform: translateX(-250%);
+    }
+}
+
+
+@media screen and (max-width:1200px){
+    .content{
+        width:100%;
+        text-align:center;
+    }
+
+    .content h1{
+        margin-bottom: 8%;
+    }
+
+    .content h3{
+        margin-bottom: 5%;
+    }
+
+    .image{
+        width: 100%;
+        position:absolute;
+        bottom:-5%;
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+    }
+    img{
+        width:20rem;
+        
+    }
+} 
+
+
+
+/* footer */
+footer {
+    background-color: #333; 
+    color: #fff; 
+    padding: 20px; 
+    text-align: center;
+    max-width: 100%;
+    
+}
+
+/* Style links within the footer */
+footer a {
+    color: #fff; 
+    text-decoration: none; 
+}
+
+/* Style links on hover */
+footer a:hover {
+    text-decoration: underline; 
+}
+
+/* Style the footer content */
+.footer-content {
+    width: 100%; 
+    margin: 0 auto;
+    /* object-fit: cover;
+object-position: center; */
+}
+
+
+
+
+
+
+
+
+
+
+
